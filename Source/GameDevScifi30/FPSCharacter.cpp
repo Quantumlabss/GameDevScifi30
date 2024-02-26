@@ -156,6 +156,8 @@ void AFPSCharacter::Shoot()
 			SpawnParams.Owner = this;
 			SpawnParams.Instigator = GetInstigator();
 
+			// BALLING IN OHIO
+
 			// Spawn the projectile at the muzzle.
 			AProjectile* Projectile = World->SpawnActor<AProjectile>(ProjectileClass, MuzzleLocation, MuzzleRotation, SpawnParams);
 			if (Projectile)
