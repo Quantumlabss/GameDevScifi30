@@ -32,7 +32,7 @@ AProjectile::AProjectile()
 		ProjectileMovementComponent->MaxSpeed = 3000.0f;
 		ProjectileMovementComponent->bRotationFollowsVelocity = true;
 		ProjectileMovementComponent->bShouldBounce = true;
-		ProjectileMovementComponent->Bounciness = 100.3f;
+		ProjectileMovementComponent->Bounciness = 300000000.3f;
 		ProjectileMovementComponent->ProjectileGravityScale = 0.0f;
 	}
 	if (!ProjectileMeshComponent)
