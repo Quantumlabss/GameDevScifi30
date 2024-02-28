@@ -127,11 +127,7 @@ void AFPSCharacter::StopCrouch()
 	
 }
 
-void AFPSCharacter::Shoot()
-{
-	
 
-}
 
 
 void AFPSCharacter::Shoot()
