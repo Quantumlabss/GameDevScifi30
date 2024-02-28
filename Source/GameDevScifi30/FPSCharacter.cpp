@@ -127,6 +127,12 @@ void AFPSCharacter::StopCrouch()
 	
 }
 
+void AFPSCharacter::Shoot()
+{
+	
+
+}
+
 
 void AFPSCharacter::Shoot()
 {
@@ -159,7 +165,7 @@ void AFPSCharacter::Shoot()
 			// BALLING IN OHIO
 
 			// Spawn the projectile at the muzzle.
-			AProjectile* Projectile = World->SpawnActor<AProjectile>(ProjectileClass, MuzzleLocation, MuzzleRotation, SpawnParams);
+		AProjectile* Projectile = World->SpawnActor<AProjectile>(ProjectileClass, MuzzleLocation, MuzzleRotation, SpawnParams);
 			if (Projectile)
 			{
 				// Set the projectile's initial trajectory.
