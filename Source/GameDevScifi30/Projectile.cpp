@@ -60,6 +60,7 @@ AProjectile::AProjectile()
 
 	CollisionComponent->BodyInstance.SetCollisionProfileName(TEXT("Projectile"));
 
+	
 }
 
 // Called when the game starts or when spawned
@@ -74,7 +75,17 @@ void AProjectile::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+
+
+
 }
+void AProjectile::OnActorBeginOverlap()
+{
+	Destroy;
+
+}
+
+
 
 
 void AProjectile::FireInDirection(const FVector& ShootDirection)
