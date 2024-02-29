@@ -117,7 +117,7 @@ void AFPSCharacter::StartCrouch()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("Crouching"));
 	Crouch();
-	
+	  
 }
 
 void AFPSCharacter::StopCrouch()
