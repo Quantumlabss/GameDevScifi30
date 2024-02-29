@@ -3,6 +3,8 @@
 
 #include "Projectile.h"
 
+
+
 // Sets default values
 AProjectile::AProjectile()
 {
@@ -59,6 +61,7 @@ AProjectile::AProjectile()
 
 
 	CollisionComponent->BodyInstance.SetCollisionProfileName(TEXT("Projectile"));
+	CollisionComponent->OnComponentHit.AddDynamic(this, &AProjectile::OnHit);
 
 	
 }
@@ -78,6 +81,16 @@ void AProjectile::Tick(float DeltaTime)
 
 
 
+}
+
+// Function that is called when the projectile hits something.
+void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit)
+{
+	if (OtherActor != this && OtherComponent->IsSimulatingPhysics())
+	{
+		OtherComponent->AddImpulseAtLocation(ProjectileMovementComponent->Velocity * 100.0f, Hit.ImpactPoint);
+	}
+	Destroy();
 }
 
 
