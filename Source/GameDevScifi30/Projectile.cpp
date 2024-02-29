@@ -79,11 +79,6 @@ void AProjectile::Tick(float DeltaTime)
 
 
 }
-void AProjectile::OnActorBeginOverlap()
-{
-	Destroy;
-
-}
 
 
 

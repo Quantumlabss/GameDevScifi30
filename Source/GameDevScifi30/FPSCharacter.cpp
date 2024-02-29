@@ -7,7 +7,7 @@
 // Sets default values
 AFPSCharacter::AFPSCharacter()
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+ 	/// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 
@@ -128,6 +128,8 @@ void AFPSCharacter::StopCrouch()
 }
 
 
+
+
 void AFPSCharacter::Shoot()
 {
 	// Attempt to fire a projectile.
@@ -159,7 +161,7 @@ void AFPSCharacter::Shoot()
 			// BALLING IN OHIO
 
 			// Spawn the projectile at the muzzle.
-			AProjectile* Projectile = World->SpawnActor<AProjectile>(ProjectileClass, MuzzleLocation, MuzzleRotation, SpawnParams);
+		AProjectile* Projectile = World->SpawnActor<AProjectile>(ProjectileClass, MuzzleLocation, MuzzleRotation, SpawnParams);
 			if (Projectile)
 			{
 				// Set the projectile's initial trajectory.
