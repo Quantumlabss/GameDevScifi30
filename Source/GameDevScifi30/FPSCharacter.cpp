@@ -5,6 +5,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "DrawDebugHelpers.h"
 
+
 // Sets default values
 AFPSCharacter::AFPSCharacter()
 {
@@ -138,17 +139,21 @@ void AFPSCharacter::Shoot()
 	// Attempt to fire a projectile.
 
 	FHitResult OutHit;
-	//FVector Start = GetActorLocation();
-	FVector Start = this.GetComponent().
+	FVector Start = GetActorLocation();
+	
+	//FVector Start = UCameraComponent.
 
-	Start.Z += 50.f;
-	Start.X += 200.f;
+	//Start.Z += 50.f;
+	//Start.X += 200.f;
+	FRotator Rotation = GetActorRotation();
 
 	FVector ForwardVector = GetActorForwardVector();
 	FVector End = ((ForwardVector * 500.f) + Start);
 	FCollisionQueryParams CollisionParams;
+	  
 
-	DrawDebugLine(GetWorld(), Start, End, FColor::Green, false, 1, 0, 5);
+	
+	DrawDebugLine(GetWorld(), Start, End, FColor::Green, false, 1, 0, 1);
 
 	//if (ActorLineTraceSingle(OutHit, Start, End, ECC_WorldStatic, CollisionParams))
 	//{
@@ -159,8 +164,11 @@ void AFPSCharacter::Shoot()
 	if (ActorLineTraceSingle(OutHit, Start, End, ECC_WorldStatic, CollisionParams)) {
 
 		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Green, FString::Printf(TEXT("The Component Being Hit is: %s"), *OutHit.GetActor()->GetName()));
+		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Green, FString::Printf(TEXT("The Component Being Hit is: %s"), *OutHit.GetComponent()->GetName()));
 
 	}
+
+
 
 }
 
