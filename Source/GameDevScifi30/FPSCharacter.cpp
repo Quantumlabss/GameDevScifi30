@@ -143,7 +143,7 @@ void AFPSCharacter::Shoot()
 	
 	//FVector Start = UCameraComponent.
 
-	//Start.Z += 50.f;
+	Start.Z += 50.f;
 	//Start.X += 200.f;
 	FRotator Rotation = GetActorRotation();
 
@@ -161,11 +161,16 @@ void AFPSCharacter::Shoot()
 
 		//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT(OutHit.GetComponent()->GetName()));
 	//}
-	if (ActorLineTraceSingle(OutHit, Start, End, ECC_WorldStatic, CollisionParams)) {
+	if (ActorLineTraceSingle(OutHit, Start, End, ECC_WorldDynamic, CollisionParams)) {
 
 		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Green, FString::Printf(TEXT("The Component Being Hit is: %s"), *OutHit.GetActor()->GetName()));
 		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Green, FString::Printf(TEXT("The Component Being Hit is: %s"), *OutHit.GetComponent()->GetName()));
-
+		
+		if (OutHit.GetActor()->ActorHasTag("hittable"))
+		{
+			OutHit.GetActor()->Destroy();
+		}
+		
 	}
 
 
