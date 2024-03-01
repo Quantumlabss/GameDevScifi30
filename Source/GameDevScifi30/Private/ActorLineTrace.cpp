@@ -52,7 +52,7 @@ void AActorLineTrace::Tick(float DeltaTime)
 
 	if (ActorLineTraceSingle(OutHit, Start, End, ECC_WorldStatic, CollisionParams))
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Green, FString::Printf(TEXT("The Component Being Hit is: %s"), *OutHit.GetComponent()->GetName()));
+		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Green, FString::Printf(TEXT("The Component Being Hit is: %s"), *OutHit.GetActor()->GetName()));
 	
 		//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT(OutHit.GetComponent()->GetName()));
 	}
