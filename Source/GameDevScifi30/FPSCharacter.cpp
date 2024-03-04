@@ -15,6 +15,8 @@ AFPSCharacter::AFPSCharacter()
 
 
 }
+// skibbidi toilet
+// ohio rizz
 
 // Called when the game starts or when spawned
 void AFPSCharacter::BeginPlay()
