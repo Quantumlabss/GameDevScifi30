@@ -28,6 +28,17 @@ void AFPSCharacter::BeginPlay()
 	// The -1 "Key" value argument prevents the message from being updated or refreshed.
 	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("We are using FPSCharacter."));
 	//DefaultMaxWalkingSpeed = GetCharacterMovement()->MaxWalkSpeed;
+
+
+	//public float PlayerHealth = 100.0f;
+	//float PlayerHealth = 100.0f;
+	//PlayerHealth = 100.0f;
+
+	FullHealth = 1000.0f;
+	Health = FullHealth;
+	HealthPercentage = 1.0f;
+	PreviousHealth = HealthPercentage;
+
 	
 }
 
@@ -37,6 +48,8 @@ void AFPSCharacter::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	//FHitResult OutHit;
+	//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT(PlayerHealth()));
+
 
 }
 
@@ -175,7 +188,28 @@ void AFPSCharacter::Shoot()
 		
 	}
 
+	float AFPSCharacter::GetHealth()
+	{
+		return HealthPercentage;
+	}
 
+
+	FText AFPSCharacter::GetHealthIntText()
+	{
+		int32 HP = FMath::RoundHalfFromZero(HealthPercentage * 100);
+		FString HPS = FString::FromInt(HP);
+		FString HealthHUD = HPS + FString(TEXT("%"));
+		FText HPText = FText::FromString(HealthHUD);
+		return HPText;
+	}
+
+	void AFPSCharacter::UpdateHealth(float HealthChange)
+	{
+		Health += HealthChange;
+		Health = FMath::Clamp(Health, 0.0f, FullHealth);
+		PreviousHealth = HealthPercentage;
+		HealthPercentage = Health / FullHealth;
+	}
 
 }
 
