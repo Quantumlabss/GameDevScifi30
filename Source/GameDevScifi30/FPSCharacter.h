@@ -79,6 +79,10 @@ protected:
 
 	UFUNCTION()
 	void Shoot();
+	//UFUNCTION(BlueprintNativeEvent, Category = "Shooting")
+	//void OnHit();
+
+	
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
 	FVector MuzzleOffset;
