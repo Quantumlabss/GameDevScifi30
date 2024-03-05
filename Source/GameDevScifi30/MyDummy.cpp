@@ -40,7 +40,7 @@ void AMyDummy::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPri
 {
 	if (OtherActor != this && OtherComponent->IsSimulatingPhysics())
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT(AActor()->GetName()));
+		//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT(AActor()->GetName()));
 		//OtherComponent->AddImpulseAtLocation(ProjectileMovementComponent->Velocity * 100.0f, Hit.ImpactPoint);
 	}
 	//Destroy();
