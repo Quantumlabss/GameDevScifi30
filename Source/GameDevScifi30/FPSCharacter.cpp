@@ -15,6 +15,8 @@ AFPSCharacter::AFPSCharacter()
 
 
 }
+// skibbidi toilet
+// ohio rizz
 
 // Called when the game starts or when spawned
 void AFPSCharacter::BeginPlay()
@@ -26,6 +28,17 @@ void AFPSCharacter::BeginPlay()
 	// The -1 "Key" value argument prevents the message from being updated or refreshed.
 	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("We are using FPSCharacter."));
 	//DefaultMaxWalkingSpeed = GetCharacterMovement()->MaxWalkSpeed;
+
+
+	//public float PlayerHealth = 100.0f;
+	//float PlayerHealth = 100.0f;
+	//PlayerHealth = 100.0f;
+
+	FullHealth = 1000.0f;
+	Health = FullHealth;
+	HealthPercentage = 1.0f;
+	PreviousHealth = HealthPercentage;
+
 	
 }
 
@@ -33,8 +46,6 @@ void AFPSCharacter::BeginPlay()
 void AFPSCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	//FHitResult OutHit;
 
 }
 
@@ -138,43 +149,35 @@ void AFPSCharacter::Shoot()
 {
 	// Attempt to fire a projectile.
 
-	FHitResult OutHit;
-	FVector Start = GetActorLocation();
-	
-	//FVector Start = UCameraComponent.
+		// Set MuzzleOffset to spawn projectiles slightly in front of the camera.
+		MuzzleOffset.Set(100.0f, 0.0f, 0.0f);
 
-	Start.Z += 50.f;
-	//Start.X += 200.f;
-	FRotator Rotation = GetActorRotation();
+		// Transform MuzzleOffset from camera space to world space.
+		FVector MuzzleLocation = CameraLocation + FTransform(CameraRotation).TransformVector(MuzzleOffset);
 
-	FVector ForwardVector = GetActorForwardVector();
-	FVector End = ((ForwardVector * 500.f) + Start);
-	FCollisionQueryParams CollisionParams;
-	  
+		// Skew the aim to be slightly upwards.
+		FRotator MuzzleRotation = CameraRotation;
+		MuzzleRotation.Pitch += 10.0f;
 
-	
-	DrawDebugLine(GetWorld(), Start, End, FColor::Green, false, 1, 0, 1);
-
-	//if (ActorLineTraceSingle(OutHit, Start, End, ECC_WorldStatic, CollisionParams))
-	//{
-	//	GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Green, FString::Printf(TEXT("The Component Being Hit is: %s"), *OutHit.GetActor()->GetName()));
-
-		//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT(OutHit.GetComponent()->GetName()));
-	//}
-	if (ActorLineTraceSingle(OutHit, Start, End, ECC_WorldDynamic, CollisionParams)) {
-
-		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Green, FString::Printf(TEXT("The Component Being Hit is: %s"), *OutHit.GetActor()->GetName()));
-		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Green, FString::Printf(TEXT("The Component Being Hit is: %s"), *OutHit.GetComponent()->GetName()));
-		
-		if (OutHit.GetActor()->ActorHasTag("hittable"))
+		UWorld* World = GetWorld();
+		if (World)
 		{
-			OutHit.GetActor()->Destroy();
+			FActorSpawnParameters SpawnParams;
+			SpawnParams.Owner = this;
+			SpawnParams.Instigator = GetInstigator();
+
+			// BALLING IN OHIO
+
+			// Spawn the projectile at the muzzle.
+		AProjectile* Projectile = World->SpawnActor<AProjectile>(ProjectileClass, MuzzleLocation, MuzzleRotation, SpawnParams);
+			if (Projectile)
+			{
+				// Set the projectile's initial trajectory.
+				FVector LaunchDirection = MuzzleRotation.Vector();
+				Projectile->FireInDirection(LaunchDirection);
+			}
 		}
-		
 	}
-
-
-
 }
 
 
