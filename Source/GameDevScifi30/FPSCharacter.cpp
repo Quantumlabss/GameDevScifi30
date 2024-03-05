@@ -30,14 +30,6 @@ void AFPSCharacter::BeginPlay()
 	//DefaultMaxWalkingSpeed = GetCharacterMovement()->MaxWalkSpeed;
 
 
-	//public float PlayerHealth = 100.0f;
-	//float PlayerHealth = 100.0f;
-	//PlayerHealth = 100.0f;
-
-	FullHealth = 1000.0f;
-	Health = FullHealth;
-	HealthPercentage = 1.0f;
-	PreviousHealth = HealthPercentage;
 
 	
 }
