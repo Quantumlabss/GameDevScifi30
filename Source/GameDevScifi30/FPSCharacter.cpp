@@ -93,7 +93,7 @@ void AFPSCharacter::UpdateHealth(float HealthChange)
 	HealthPercentage = Health / FullHealth;
 }
 
-void AFPSCharacter::MoveForward(float Value)
+void AFPSCharacter::MoveForward(float Value) 
 {
 	// Find out which way is "forward" and record that the player wants to move that way.
 	FVector Direction = FRotationMatrix(Controller->GetControlRotation()).GetScaledAxis(EAxis::X);
