@@ -2,6 +2,8 @@
 
 
 #include "MyDummy.h"
+#include "Projectile.cpp"
+#include "Projectile.h"
 
 
 // Sets default values
@@ -32,16 +34,5 @@ void AMyDummy::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-}
-
-// Function that is called when the projectile hits something.
-void AMyDummy::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit)
-{
-	if (OtherActor != this && OtherComponent->IsSimulatingPhysics())
-	{
-		//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT(AActor()->GetName()));
-		//OtherComponent->AddImpulseAtLocation(ProjectileMovementComponent->Velocity * 100.0f, Hit.ImpactPoint);
-	}
-	//Destroy();
 }
 
