@@ -24,6 +24,12 @@ void AFPSCharacter::BeginPlay()
 	Super::BeginPlay();
 	check(GEngine != nullptr);
 
+	FullHealth = 1000.0f;
+	Health = FullHealth;
+	HealthPercentage = 1.0f;
+	//bCanBeDamaged = true;
+
+
 	// Display a debug message for five seconds. 
 	// The -1 "Key" value argument prevents the message from being updated or refreshed.
 	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("We are using FPSCharacter."));
@@ -140,36 +146,40 @@ void AFPSCharacter::StopCrouch()
 void AFPSCharacter::Shoot()
 {
 	// Attempt to fire a projectile.
+	FHitResult OutHit;
+	FVector Start = GetActorLocation();
+	//FVector Start = UCameraComponent.
+	//Start.Z += 50.f;
+	//Start.X += 200.f;
+	FRotator Rotation = GetActorRotation();
+	FVector ForwardVector = GetActorForwardVector();
+	FVector End = ((ForwardVector * 500.f) + Start);
+	FCollisionQueryParams CollisionParams;
 
-		// Set MuzzleOffset to spawn projectiles slightly in front of the camera.
-		MuzzleOffset.Set(100.0f, 0.0f, 0.0f);
+	DrawDebugLine(GetWorld(), Start, End, FColor::Green, false, 1, 0, 5);
+	//if (ActorLineTraceSingle(OutHit, Start, End, ECC_WorldStatic, CollisionParams))
+	//{
+	// GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Green,
+	//FString::Printf(TEXT("The Component Being Hit is: %s"), *OutHit.GetActor()->GetName()));
 
-		// Transform MuzzleOffset from camera space to world space.
-		FVector MuzzleLocation = CameraLocation + FTransform(CameraRotation).TransformVector(MuzzleOffset);
+	//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red,
 
-		// Skew the aim to be slightly upwards.
-		FRotator MuzzleRotation = CameraRotation;
-		MuzzleRotation.Pitch += 10.0f;
+	
+	//}
+	if (ActorLineTraceSingle(OutHit, Start, End, ECC_WorldStatic, CollisionParams)) {
+		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Green,
 
-		UWorld* World = GetWorld();
-		if (World)
-		{
-			FActorSpawnParameters SpawnParams;
-			SpawnParams.Owner = this;
-			SpawnParams.Instigator = GetInstigator();
+			FString::Printf(TEXT("The Component Being Hit is: %s"), *OutHit.GetActor()->GetName()));
 
-			// BALLING IN OHIO
+		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Green,
 
-			// Spawn the projectile at the muzzle.
-		AProjectile* Projectile = World->SpawnActor<AProjectile>(ProjectileClass, MuzzleLocation, MuzzleRotation, SpawnParams);
-			if (Projectile)
-			{
-				// Set the projectile's initial trajectory.
-				FVector LaunchDirection = MuzzleRotation.Vector();
-				Projectile->FireInDirection(LaunchDirection);
-			}
-		}
+			FString::Printf(TEXT("The Component Being Hit is: %s"),
+				*OutHit.GetComponent()->GetName()));
 	}
+
 }
+
+
+
 
 

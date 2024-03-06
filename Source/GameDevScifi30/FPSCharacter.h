@@ -17,7 +17,7 @@ class GAMEDEVSCIFI30_API AFPSCharacter : public ACharacter
 public:
 	// Sets default values for this character's properties
 	AFPSCharacter();
-	float PlayerHealth;
+
 
 
 
@@ -27,6 +27,19 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = Projectile)
 	TSubclassOf<class AProjectile> ProjectileClass;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
+	float FullHealth;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
+	float Health;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
+	float HealthPercentage;
+
+
+	UFUNCTION(BlueprintPure, Category = "Health")
+	FText GetHealthIntText();
 
 public:	
 	// Called every frame
@@ -89,28 +102,5 @@ protected:
 	FVector MuzzleOffset;
 
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
-	float FullHealth;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
-	float Health;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
-	float HealthPercentage;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
-	float PreviousHealth;
-
-
-	UFUNCTION(BlueprintPure, Category = "Health")
-	float GetHealth();
-
-
-	UFUNCTION(BlueprintCallable, Category = "Health")
-	void UpdateHealth(float HealthChange);
-
-
-
-	UFUNCTION(BlueprintPure, Category = "Health")
-	FText GetHealthIntText();
 };
