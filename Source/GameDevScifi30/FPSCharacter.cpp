@@ -92,7 +92,7 @@ void AFPSCharacter::UpdateHealth(float HealthChange)
 	Health = FMath::Clamp(Health += HealthChange, 0.0f, FullHealth);
 	HealthPercentage = Health / FullHealth;
 }
-
+ 
 void AFPSCharacter::MoveForward(float Value) 
 {
 	// Find out which way is "forward" and record that the player wants to move that way.
