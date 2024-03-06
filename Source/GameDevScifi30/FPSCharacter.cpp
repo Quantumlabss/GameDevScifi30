@@ -2,6 +2,7 @@
 
 
 #include "FPSCharacter.h"
+#include "Kismet/GameplayStatics.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "DrawDebugHelpers.h"
 
@@ -199,6 +200,9 @@ void AFPSCharacter::Shoot()
 
 			FString::Printf(TEXT("The Component Being Hit is: %s"),
 				*OutHit.GetComponent()->GetName()));
+		//MyHit = SweepResult;
+		//UGameplayStatics::ApplyPointDamage(OutHit.GetActor(), 200.0f, GetActorLocation());
+		Health = Health - 10;
 	}
 
 
