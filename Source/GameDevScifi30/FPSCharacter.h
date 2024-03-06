@@ -24,7 +24,7 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser);
 	UPROPERTY(EditDefaultsOnly, Category = Projectile)
 	TSubclassOf<class AProjectile> ProjectileClass;
 
@@ -38,9 +38,6 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	/** The speed at which the character will be walking */
 
-	UFUNCTION(BlueprintCallable, Category = "Power")
-	void UpdateHealth(float HealthChange);
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
 	float FullHealth;
 
@@ -51,12 +48,14 @@ public:
 	float HealthPercentage;
 
 
+	UFUNCTION(BlueprintPure, Category = "Health")
 	float GetHealth();
 
 	UFUNCTION(BlueprintPure, Category = "Health")
 	FText GetHealthIntText();
 	
-
+	UFUNCTION(BlueprintCallable, Category = "Power")
+	void UpdateHealth(float HealthChange);
 protected:
 
 

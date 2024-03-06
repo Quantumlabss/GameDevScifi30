@@ -4,8 +4,10 @@
 #include "FPSCharacter.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "DrawDebugHelpers.h"
-
-
+#include "Kismet/GameplayStatics.h"
+#include "Kismet/KismetMathLibrary.h"
+#include "TimerManager.h"
+#include "Components/TimelineComponent.h"
 // Sets default values
 AFPSCharacter::AFPSCharacter()
 {
@@ -73,7 +75,7 @@ void AFPSCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 
 float AFPSCharacter::GetHealth()
 {
-	return 0.0f;
+	return HealthPercentage;
 }
 
 FText AFPSCharacter::GetHealthIntText()
@@ -92,6 +94,23 @@ void AFPSCharacter::UpdateHealth(float HealthChange)
 	Health = FMath::Clamp(Health += HealthChange, 0.0f, FullHealth);
 	HealthPercentage = Health / FullHealth;
 }
+
+//void AFPSCharacter::SetDamageState()
+//{
+//	bCanBeDamaged = true;
+//}
+
+float AFPSCharacter::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser)
+{
+	//bCanBeDamaged = false;
+	//redFlash = true;
+	UpdateHealth(-DamageAmount);
+	//DamageTimer();
+	return DamageAmount;
+}
+
+
+
 
 void AFPSCharacter::MoveForward(float Value)
 {
