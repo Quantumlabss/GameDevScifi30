@@ -28,6 +28,19 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = Projectile)
 	TSubclassOf<class AProjectile> ProjectileClass;
 
+
+
+public:	
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
+
+	// Called to bind functionality to input
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	/** The speed at which the character will be walking */
+
+	UFUNCTION(BlueprintCallable, Category = "Power")
+	void UpdateHealth(float HealthChange);
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
 	float FullHealth;
 
@@ -38,20 +51,10 @@ protected:
 	float HealthPercentage;
 
 
+	float GetHealth();
+
 	UFUNCTION(BlueprintPure, Category = "Health")
 	FText GetHealthIntText();
-
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-	/** The speed at which the character will be walking */
-
-
-
-
 	
 
 protected:

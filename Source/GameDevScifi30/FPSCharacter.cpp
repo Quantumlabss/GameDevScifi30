@@ -27,6 +27,7 @@ void AFPSCharacter::BeginPlay()
 	FullHealth = 1000.0f;
 	Health = FullHealth;
 	HealthPercentage = 1.0f;
+	
 	//bCanBeDamaged = true;
 
 
@@ -44,6 +45,7 @@ void AFPSCharacter::BeginPlay()
 void AFPSCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
 
 }
 
@@ -67,6 +69,28 @@ void AFPSCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 	PlayerInputComponent->BindAction("Crouch", IE_Released, this, &AFPSCharacter::StopCrouch);
 	PlayerInputComponent->BindAction("Shoot", IE_Pressed, this, &AFPSCharacter::Shoot);
 
+}
+
+float AFPSCharacter::GetHealth()
+{
+	return 0.0f;
+}
+
+FText AFPSCharacter::GetHealthIntText()
+{
+	//turn FText();
+	int32 HP = FMath::RoundHalfFromZero(HealthPercentage * 100);
+	FString HPS = FString::FromInt(HP);
+	FString HealthHUD = HPS + FString(TEXT("%"));
+	FText HPText = FText::FromString(HealthHUD);
+	return HPText;
+}
+
+
+void AFPSCharacter::UpdateHealth(float HealthChange)
+{
+	Health = FMath::Clamp(Health += HealthChange, 0.0f, FullHealth);
+	HealthPercentage = Health / FullHealth;
 }
 
 void AFPSCharacter::MoveForward(float Value)
@@ -164,7 +188,7 @@ void AFPSCharacter::Shoot()
 
 	//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red,
 
-	
+
 	//}
 	if (ActorLineTraceSingle(OutHit, Start, End, ECC_WorldStatic, CollisionParams)) {
 		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Green,
@@ -176,6 +200,13 @@ void AFPSCharacter::Shoot()
 			FString::Printf(TEXT("The Component Being Hit is: %s"),
 				*OutHit.GetComponent()->GetName()));
 	}
+
+
+
+
+
+
+
 
 }
 
