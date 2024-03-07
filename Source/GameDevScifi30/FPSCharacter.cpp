@@ -25,7 +25,7 @@ void AFPSCharacter::BeginPlay()
 	Super::BeginPlay();
 	check(GEngine != nullptr);
 
-	FullHealth = 1000.0f;
+	FullHealth = 100.0f;
 	Health = FullHealth;
 	HealthPercentage = 1.0f;
 	
@@ -46,7 +46,9 @@ void AFPSCharacter::BeginPlay()
 void AFPSCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	if (Health <= 0.0f) {
+		Destroy();
+	}
 
 }
 
@@ -202,7 +204,13 @@ void AFPSCharacter::Shoot()
 				*OutHit.GetComponent()->GetName()));
 		//MyHit = SweepResult;
 		//UGameplayStatics::ApplyPointDamage(OutHit.GetActor(), 200.0f, GetActorLocation());
-		Health = Health - 10;
+		if (OutHit.GetActor()->ActorHasTag("player")) {
+
+			Health = Health - 10.0f;
+			HealthPercentage = HealthPercentage - 0.10f;
+
+		}
+
 	}
 
 
