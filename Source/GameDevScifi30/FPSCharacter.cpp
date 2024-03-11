@@ -176,8 +176,8 @@ void AFPSCharacter::Shoot()
 	FHitResult OutHit;
 	FVector Start = GetActorLocation();
 	//FVector Start = UCameraComponent.
-	//Start.Z += 50.f;
-	//Start.X += 200.f;
+	Start.Z += 50.f;
+	Start.X += 200.f;
 	FRotator Rotation = GetActorRotation();
 	FVector ForwardVector = GetActorForwardVector();
 	FVector End = ((ForwardVector * 500.f) + Start);
@@ -208,6 +208,13 @@ void AFPSCharacter::Shoot()
 
 			Health = Health - 10.0f;
 			HealthPercentage = HealthPercentage - 0.10f;
+
+		}
+		if (OutHit.GetActor()->ActorHasTag("mover")) {
+
+			//Health = Health - 10.0f;
+			//HealthPercentage = HealthPercentage - 0.10f;
+			OutHit.GetActor()->Destroy();
 
 		}
 
