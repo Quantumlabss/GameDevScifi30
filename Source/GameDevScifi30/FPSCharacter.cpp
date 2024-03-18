@@ -16,8 +16,12 @@ AFPSCharacter::AFPSCharacter()
 
 
 }
-// skibbidi toilet
+// skibbidi toilet is bad
 // ohio rizz
+// sigma moment
+// pancake engine
+// gyatt of the century
+// alex and canyon are rizzless
 
 // Called when the game starts or when spawned
 void AFPSCharacter::BeginPlay()
@@ -64,7 +68,7 @@ void AFPSCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 	PlayerInputComponent->BindAxis("MoveBackward", this, &AFPSCharacter::MoveBackward);
 	PlayerInputComponent->BindAxis("TurnX", this, &AFPSCharacter::AddControllerYawInput);
 	PlayerInputComponent->BindAxis("TurnY", this, &AFPSCharacter::AddControllerPitchInput);
-	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AFPSCharacter::StartJump);
+	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AFPSCharacter::DoubleJump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &AFPSCharacter::StopJump);
 	PlayerInputComponent->BindAction("Sprint", IE_Pressed, this, &AFPSCharacter::StartSprint);
 	PlayerInputComponent->BindAction("Sprint", IE_Released, this, &AFPSCharacter::StopSprint);
@@ -125,7 +129,7 @@ void AFPSCharacter::MoveBackward(float Value)
 
 }
 
-void AFPSCharacter::StartJump()
+void AFPSCharacter::DoubleJump()
 {
 	bPressedJump = true;
 }
@@ -173,50 +177,44 @@ void AFPSCharacter::StopCrouch()
 void AFPSCharacter::Shoot()
 {
 	// Attempt to fire a projectile.
-	FHitResult OutHit;
-	FVector Start = GetActorLocation();
+//	FHitResult OutHit;
+//	FVector Start = GetActorLocation();
 	//FVector Start = UCameraComponent.
-	Start.Z += 50.f;
-	Start.X += 200.f;
-	FRotator Rotation = GetActorRotation();
-	FVector ForwardVector = GetActorForwardVector();
-	FVector End = ((ForwardVector * 500.f) + Start);
-	FCollisionQueryParams CollisionParams;
+	//Start.Z += 50.f;
+	//Start.X += 200.f;
+//	FRotator Rotation = GetActorRotation();
+//	FVector ForwardVector = GetActorForwardVector();
+//	FVector End = ((ForwardVector * 500.f) + Start);
+	//FCollisionQueryParams CollisionParams;
+	//FCollisionQueryParams AddIgnoredActor(OutHit.GetActor()->ActorHasTag("player"));
+	//FCollisionQueryParams QueryParams;
+//	QueryParams.AddIgnoredActor(this);
+//	DrawDebugLine(GetWorld(), Start, End, FColor::Green, false, 1, 0, 5);
 
-	DrawDebugLine(GetWorld(), Start, End, FColor::Green, false, 1, 0, 5);
-	//if (ActorLineTraceSingle(OutHit, Start, End, ECC_WorldStatic, CollisionParams))
-	//{
-	// GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Green,
-	//FString::Printf(TEXT("The Component Being Hit is: %s"), *OutHit.GetActor()->GetName()));
+//	if (ActorLineTraceSingle(OutHit, Start, End, ECC_WorldDynamic, QueryParams)) {
+//		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Green,
 
-	//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red,
+	//		FString::Printf(TEXT("The Component Being Hit is: %s"), *OutHit.GetActor()->GetName()));
 
+	//	GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Green,
 
-	//}
-	if (ActorLineTraceSingle(OutHit, Start, End, ECC_WorldStatic, CollisionParams)) {
-		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Green,
-
-			FString::Printf(TEXT("The Component Being Hit is: %s"), *OutHit.GetActor()->GetName()));
-
-		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Green,
-
-			FString::Printf(TEXT("The Component Being Hit is: %s"),
-				*OutHit.GetComponent()->GetName()));
+	//		FString::Printf(TEXT("The Component Being Hit is: %s"),
+		//		*OutHit.GetComponent()->GetName()));
 		//MyHit = SweepResult;
 		//UGameplayStatics::ApplyPointDamage(OutHit.GetActor(), 200.0f, GetActorLocation());
-		if (OutHit.GetActor()->ActorHasTag("player")) {
-
-			Health = Health - 10.0f;
-			HealthPercentage = HealthPercentage - 0.10f;
-
-		}
-		if (OutHit.GetActor()->ActorHasTag("mover")) {
+	//	if (OutHit.GetActor()->ActorHasTag("player")) {
 
 			//Health = Health - 10.0f;
 			//HealthPercentage = HealthPercentage - 0.10f;
-			OutHit.GetActor()->Destroy();
 
-		}
+	//	}
+	//	if (OutHit.GetActor()->ActorHasTag("enemy")) {
+
+			//Health = Health - 10.0f;
+			//HealthPercentage = HealthPercentage - 0.10f;
+		//	OutHit.GetActor()->Destroy();
+
+		//}
 
 	}
 
