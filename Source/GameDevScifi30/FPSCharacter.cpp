@@ -14,8 +14,10 @@ AFPSCharacter::AFPSCharacter()
 	PrimaryActorTick.bCanEverTick = true;
 
 
-
+	
 }
+//I am currently hitting the griddy for ukraine
+//alex has 0 rizz
 // skibbidi toilet
 // ohio rizz
 
@@ -167,7 +169,7 @@ void AFPSCharacter::StopCrouch()
 	
 }
 
-
+//I am currently hitting the griddy for palestine
 
 
 void AFPSCharacter::Shoot()
@@ -209,6 +211,10 @@ void AFPSCharacter::Shoot()
 			Health = Health - 10.0f;
 			HealthPercentage = HealthPercentage - 0.10f;
 
+		}
+
+		if (OutHit.GetActor()->ActorHasTag("Barrel")) {
+			//OutHit.GetActor(d);
 		}
 
 	}
