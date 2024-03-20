@@ -175,17 +175,17 @@ void AFPSCharacter::StopCrouch()
 void AFPSCharacter::Shoot()
 {
 	// Attempt to fire a projectile.
-	FHitResult OutHit;
-	FVector Start = GetActorLocation();
+	//FHitResult OutHit;
+//	FVector Start = GetActorLocation();
 	//FVector Start = UCameraComponent.
 	//Start.Z += 50.f;
 	//Start.X += 200.f;
-	FRotator Rotation = GetActorRotation();
-	FVector ForwardVector = GetActorForwardVector();
-	FVector End = ((ForwardVector * 500.f) + Start);
-	FCollisionQueryParams CollisionParams;
+//	FRotator Rotation = GetActorRotation();
+	//FVector ForwardVector = GetActorForwardVector();
+//	FVector End = ((ForwardVector * 500.f) + Start);
+	//FCollisionQueryParams CollisionParams;
 
-	DrawDebugLine(GetWorld(), Start, End, FColor::Green, false, 1, 0, 5);
+//	DrawDebugLine(GetWorld(), Start, End, FColor::Green, false, 1, 0, 5);
 	//if (ActorLineTraceSingle(OutHit, Start, End, ECC_WorldStatic, CollisionParams))
 	//{
 	// GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Green,
@@ -195,27 +195,27 @@ void AFPSCharacter::Shoot()
 
 
 	//}
-	if (ActorLineTraceSingle(OutHit, Start, End, ECC_WorldStatic, CollisionParams)) {
-		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Green,
+	//if (ActorLineTraceSingle(OutHit, Start, End, ECC_WorldStatic, CollisionParams)) {
+	//	GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Green,
 
-			FString::Printf(TEXT("The Component Being Hit is: %s"), *OutHit.GetActor()->GetName()));
+	//		FString::Printf(TEXT("The Component Being Hit is: %s"), *OutHit.GetActor()->GetName()));
 
-		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Green,
+	//	GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Green,
 
-			FString::Printf(TEXT("The Component Being Hit is: %s"),
-				*OutHit.GetComponent()->GetName()));
+		//	FString::Printf(TEXT("The Component Being Hit is: %s"),
+	//			*OutHit.GetComponent()->GetName()));
 		//MyHit = SweepResult;
 		//UGameplayStatics::ApplyPointDamage(OutHit.GetActor(), 200.0f, GetActorLocation());
-		if (OutHit.GetActor()->ActorHasTag("player")) {
+	//	if (OutHit.GetActor()->ActorHasTag("player")) {
 
-			Health = Health - 10.0f;
-			HealthPercentage = HealthPercentage - 0.10f;
+		//	Health = Health - 10.0f;
+	//		HealthPercentage = HealthPercentage - 0.10f;
 
-		}
+		//}
 
-		if (OutHit.GetActor()->ActorHasTag("Barrel")) {
+	//	if (OutHit.GetActor()->ActorHasTag("Barrel")) {
 			//OutHit.GetActor(d);
-		}
+	//	}
 
 	}
 
