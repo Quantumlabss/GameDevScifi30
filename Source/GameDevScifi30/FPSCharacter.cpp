@@ -75,7 +75,11 @@ void AFPSCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 	PlayerInputComponent->BindAction("Crouch", IE_Pressed, this, &AFPSCharacter::StartCrouch);
 	PlayerInputComponent->BindAction("Crouch", IE_Released, this, &AFPSCharacter::StopCrouch);
 	PlayerInputComponent->BindAction("Shoot", IE_Pressed, this, &AFPSCharacter::Shoot);
-
+	//PlayerInputComponent->BindAction("PeekLeft", IE_Pressed, this, &AFPSCharacter::StartPeekLeft);
+	//PlayerInputComponent->BindAction("PeekLeft", IE_Released, this, &AFPSCharacter::StopPeekLeft);
+	//PlayerInputComponent->BindAction("PeekRight", IE_Pressed, this, &AFPSCharacter::StartPeekRight);
+	//PlayerInputComponent->BindAction("PeekRight", IE_Released, this, &AFPSCharacter::StopPeekRight);
+	PlayerInputComponent->BindAction("Gerande", IE_Pressed, this, &AFPSCharacter::Gernade);
 }
 
 float AFPSCharacter::GetHealth()
@@ -170,53 +174,116 @@ void AFPSCharacter::StopCrouch()
 	UnCrouch();
 	
 }
+//void AFPSCharacter::StartPeekLeft()
+//{
 
 
+//}
+
+//void AFPSCharacter::StopPeekLeft()
+//{
 
 
-void AFPSCharacter::Shoot()
+//}
+//void AFPSCharacter::StartPeekRight()
+//{
+
+//}
+
+//void AFPSCharacter::StopPeekRight()
+//{
+
+
+//}
+
+void AFPSCharacter::Gernade()
 {
 	// Attempt to fire a projectile.
-//	FHitResult OutHit;
-//	FVector Start = GetActorLocation();
-	//FVector Start = UCameraComponent.
-	//Start.Z += 50.f;
-	//Start.X += 200.f;
-//	FRotator Rotation = GetActorRotation();
-//	FVector ForwardVector = GetActorForwardVector();
-//	FVector End = ((ForwardVector * 500.f) + Start);
-	//FCollisionQueryParams CollisionParams;
-	//FCollisionQueryParams AddIgnoredActor(OutHit.GetActor()->ActorHasTag("player"));
-	//FCollisionQueryParams QueryParams;
-//	QueryParams.AddIgnoredActor(this);
-//	DrawDebugLine(GetWorld(), Start, End, FColor::Green, false, 1, 0, 5);
+	if (ProjectileClass)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("Shoot"));
+		// Get the camera transform.
+		FVector CameraLocation;
+		FRotator CameraRotation;
+		GetActorEyesViewPoint(CameraLocation, CameraRotation);
 
-//	if (ActorLineTraceSingle(OutHit, Start, End, ECC_WorldDynamic, QueryParams)) {
-//		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Green,
+		// Set MuzzleOffset to spawn projectiles slightly in front of the camera.
+		MuzzleOffset.Set(100.0f, 0.0f, 0.0f);
 
-	//		FString::Printf(TEXT("The Component Being Hit is: %s"), *OutHit.GetActor()->GetName()));
+		// Transform MuzzleOffset from camera space to world space.
+		FVector MuzzleLocation = CameraLocation + FTransform(CameraRotation).TransformVector(MuzzleOffset);
 
-	//	GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Green,
+		// Skew the aim to be slightly upwards.
+		FRotator MuzzleRotation = CameraRotation;
+		MuzzleRotation.Pitch += 10.0f;
 
-	//		FString::Printf(TEXT("The Component Being Hit is: %s"),
-		//		*OutHit.GetComponent()->GetName()));
-		//MyHit = SweepResult;
-		//UGameplayStatics::ApplyPointDamage(OutHit.GetActor(), 200.0f, GetActorLocation());
-	//	if (OutHit.GetActor()->ActorHasTag("player")) {
+		UWorld* World = GetWorld();
+		if (World)
+		{
+			FActorSpawnParameters SpawnParams;
+			SpawnParams.Owner = this;
+			SpawnParams.Instigator = GetInstigator();
 
-			//Health = Health - 10.0f;
-			//HealthPercentage = HealthPercentage - 0.10f;
+			// Spawn the projectile at the muzzle.
+			AProjectile* Projectile = World->SpawnActor<AProjectile>(ProjectileClass, MuzzleLocation, MuzzleRotation, SpawnParams);
+			if (Projectile)
+			{
+				// Set the projectile's initial trajectory.
+				FVector LaunchDirection = MuzzleRotation.Vector();
+				Projectile->FireInDirection(LaunchDirection);
+				GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("granade spawn"));
+			}
+		}
+	}
+}
 
-	//	}
-	//	if (OutHit.GetActor()->ActorHasTag("enemy")) {
 
-			//Health = Health - 10.0f;
-			//HealthPercentage = HealthPercentage - 0.10f;
-		//	OutHit.GetActor()->Destroy();
+
+
+	//void AFPSCharacter::Shoot()
+	//{
+		// Attempt to fire a projectile.
+	//	FHitResult OutHit;
+	//	FVector Start = GetActorLocation();
+		//FVector Start = UCameraComponent.
+		//Start.Z += 50.f;
+		//Start.X += 200.f;
+	//	FRotator Rotation = GetActorRotation();
+	//	FVector ForwardVector = GetActorForwardVector();
+	//	FVector End = ((ForwardVector * 500.f) + Start);
+		//FCollisionQueryParams CollisionParams;
+		//FCollisionQueryParams AddIgnoredActor(OutHit.GetActor()->ActorHasTag("player"));
+		//FCollisionQueryParams QueryParams;
+	//	QueryParams.AddIgnoredActor(this);
+	//	DrawDebugLine(GetWorld(), Start, End, FColor::Green, false, 1, 0, 5);
+
+	//	if (ActorLineTraceSingle(OutHit, Start, End, ECC_WorldDynamic, QueryParams)) {
+	//		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Green,
+
+		//		FString::Printf(TEXT("The Component Being Hit is: %s"), *OutHit.GetActor()->GetName()));
+
+		//	GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Green,
+
+		//		FString::Printf(TEXT("The Component Being Hit is: %s"),
+			//		*OutHit.GetComponent()->GetName()));
+			//MyHit = SweepResult;
+			//UGameplayStatics::ApplyPointDamage(OutHit.GetActor(), 200.0f, GetActorLocation());
+		//	if (OutHit.GetActor()->ActorHasTag("player")) {
+
+				//Health = Health - 10.0f;
+				//HealthPercentage = HealthPercentage - 0.10f;
+
+		//	}
+		//	if (OutHit.GetActor()->ActorHasTag("enemy")) {
+
+				//Health = Health - 10.0f;
+				//HealthPercentage = HealthPercentage - 0.10f;
+			//	OutHit.GetActor()->Destroy();
+
+			//}
 
 		//}
 
-	}
 
 
 
@@ -225,7 +292,6 @@ void AFPSCharacter::Shoot()
 
 
 
-}
 
 
 

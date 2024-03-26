@@ -79,11 +79,28 @@ protected:
 	void StopCrouch();
 
 	UFUNCTION()
+	void StartPeekLeft();
+
+	UFUNCTION()
+	void StopPeekLeft();
+
+	UFUNCTION()
+	void StartPeekRight();
+
+	UFUNCTION()
+	void StopPeekRight();
+
+	UFUNCTION()
 	void Shoot();
 	//UFUNCTION(BlueprintNativeEvent, Category = "Shooting")
 	//void OnHit();
 
-	
+	UFUNCTION()
+	void Gernade();
+
+	//UFUNCTION()
+	//void FireInDirection();
+
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
 	FVector MuzzleOffset;
