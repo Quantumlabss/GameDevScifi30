@@ -14,14 +14,12 @@ AFPSCharacter::AFPSCharacter()
 	PrimaryActorTick.bCanEverTick = true;
 
 
-
+	
 }
-// skibbidi toilet is bad
+//I am currently hitting the griddy for ukraine
+//alex has 0 rizz
+// skibbidi toilet
 // ohio rizz
-// sigma moment
-// pancake engine
-// gyatt of the century
-// alex and canyon are rizzless
 
 // Called when the game starts or when spawned
 void AFPSCharacter::BeginPlay()
@@ -68,7 +66,7 @@ void AFPSCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 	PlayerInputComponent->BindAxis("MoveBackward", this, &AFPSCharacter::MoveBackward);
 	PlayerInputComponent->BindAxis("TurnX", this, &AFPSCharacter::AddControllerYawInput);
 	PlayerInputComponent->BindAxis("TurnY", this, &AFPSCharacter::AddControllerPitchInput);
-	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AFPSCharacter::DoubleJump);
+	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AFPSCharacter::StartJump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &AFPSCharacter::StopJump);
 	PlayerInputComponent->BindAction("Sprint", IE_Pressed, this, &AFPSCharacter::StartSprint);
 	PlayerInputComponent->BindAction("Sprint", IE_Released, this, &AFPSCharacter::StopSprint);
@@ -133,7 +131,7 @@ void AFPSCharacter::MoveBackward(float Value)
 
 }
 
-void AFPSCharacter::DoubleJump()
+void AFPSCharacter::StartJump()
 {
 	bPressedJump = true;
 }
@@ -177,11 +175,15 @@ void AFPSCharacter::StopCrouch()
 //void AFPSCharacter::StartPeekLeft()
 //{
 
+<<<<<<< HEAD
 
 //}
 
 //void AFPSCharacter::StopPeekLeft()
 //{
+=======
+//I am currently hitting the griddy for palestine
+>>>>>>> 959069f41bee68ca14a828a45878abff0f32cdd7
 
 
 //}
@@ -199,6 +201,7 @@ void AFPSCharacter::StopCrouch()
 void AFPSCharacter::Gernade()
 {
 	// Attempt to fire a projectile.
+<<<<<<< HEAD
 	if (ProjectileClass)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("Shoot"));
@@ -209,6 +212,30 @@ void AFPSCharacter::Gernade()
 
 		// Set MuzzleOffset to spawn projectiles slightly in front of the camera.
 		MuzzleOffset.Set(100.0f, 0.0f, 0.0f);
+=======
+	//FHitResult OutHit;
+//	FVector Start = GetActorLocation();
+	//FVector Start = UCameraComponent.
+	//Start.Z += 50.f;
+	//Start.X += 200.f;
+//	FRotator Rotation = GetActorRotation();
+	//FVector ForwardVector = GetActorForwardVector();
+//	FVector End = ((ForwardVector * 500.f) + Start);
+	//FCollisionQueryParams CollisionParams;
+
+//	DrawDebugLine(GetWorld(), Start, End, FColor::Green, false, 1, 0, 5);
+	//if (ActorLineTraceSingle(OutHit, Start, End, ECC_WorldStatic, CollisionParams))
+	//{
+	// GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Green,
+	//FString::Printf(TEXT("The Component Being Hit is: %s"), *OutHit.GetActor()->GetName()));
+
+	//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red,
+
+
+	//}
+	//if (ActorLineTraceSingle(OutHit, Start, End, ECC_WorldStatic, CollisionParams)) {
+	//	GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Green,
+>>>>>>> 959069f41bee68ca14a828a45878abff0f32cdd7
 
 		// Transform MuzzleOffset from camera space to world space.
 		FVector MuzzleLocation = CameraLocation + FTransform(CameraRotation).TransformVector(MuzzleOffset);
@@ -217,6 +244,7 @@ void AFPSCharacter::Gernade()
 		FRotator MuzzleRotation = CameraRotation;
 		MuzzleRotation.Pitch += 10.0f;
 
+<<<<<<< HEAD
 		UWorld* World = GetWorld();
 		if (World)
 		{
@@ -234,6 +262,23 @@ void AFPSCharacter::Gernade()
 				GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("granade spawn"));
 			}
 		}
+=======
+		//	FString::Printf(TEXT("The Component Being Hit is: %s"),
+	//			*OutHit.GetComponent()->GetName()));
+		//MyHit = SweepResult;
+		//UGameplayStatics::ApplyPointDamage(OutHit.GetActor(), 200.0f, GetActorLocation());
+	//	if (OutHit.GetActor()->ActorHasTag("player")) {
+
+		//	Health = Health - 10.0f;
+	//		HealthPercentage = HealthPercentage - 0.10f;
+
+		//}
+
+	//	if (OutHit.GetActor()->ActorHasTag("Barrel")) {
+			//OutHit.GetActor(d);
+	//	}
+
+>>>>>>> 959069f41bee68ca14a828a45878abff0f32cdd7
 	}
 }
 

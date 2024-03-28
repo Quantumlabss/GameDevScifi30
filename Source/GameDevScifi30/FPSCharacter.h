@@ -36,7 +36,7 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	/** The speed at which the character will be walking */
 
-	void DoubleJump();
+
 
 
 	
@@ -117,9 +117,6 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
 	float PreviousHealth;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player")
-	bool bFirstJump = true;
 
 
 	UFUNCTION(BlueprintPure, Category = "Health")
