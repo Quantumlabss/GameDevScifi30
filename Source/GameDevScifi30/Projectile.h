@@ -28,6 +28,7 @@ public:
 
 	//void OnActorBeginOverlap();
 
+
 	UPROPERTY(VisibleDefaultsOnly, Category = Projectile)
 	USphereComponent* CollisionComponent;
 

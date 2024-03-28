@@ -13,7 +13,7 @@ AProjectile::AProjectile()
 
 	if (!RootComponent)
 	{
-		RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("ProjectileSceneComponent"));
+		RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("GernadeSceneComponent"));
 	}
 	if (!CollisionComponent)
 	{
@@ -40,7 +40,7 @@ AProjectile::AProjectile()
 	if (!ProjectileMeshComponent)
 	{
 		ProjectileMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ProjectileMeshComponent"));
-		static ConstructorHelpers::FObjectFinder<UStaticMesh>Mesh(TEXT("/Script/Engine.StaticMesh'/Game/Assets/Models/MaterialSphere.MaterialSphere'"));
+		static ConstructorHelpers::FObjectFinder<UStaticMesh>Mesh(TEXT("/Script/Engine.Material'/Game/StarterContent/Materials/M_Rock_Slate.M_Rock_Slate'"));
 		if (Mesh.Succeeded())
 		{
 			ProjectileMeshComponent->SetStaticMesh(Mesh.Object);
@@ -57,10 +57,10 @@ AProjectile::AProjectile()
 	ProjectileMeshComponent->SetupAttachment(RootComponent);
 
 
-	InitialLifeSpan = 3.0f;
+	//InitialLifeSpan = 3.0f;
 
 
-	CollisionComponent->BodyInstance.SetCollisionProfileName(TEXT("Projectile"));
+	CollisionComponent->BodyInstance.SetCollisionProfileName(TEXT("Gernade"));
 	CollisionComponent->OnComponentHit.AddDynamic(this, &AProjectile::OnHit);
 
 	
